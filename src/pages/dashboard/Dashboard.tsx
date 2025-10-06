@@ -479,13 +479,13 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Controles Wowza - Botões Grandes */}
+      {/* Controle de Streaming */}
       <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Controle da Aplicação Wowza</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Controle de Streaming</h2>
             <p className="text-sm text-gray-600 mt-1">
-              Gerenciar aplicação de streaming: {userLogin}
+              Gerenciar servidor de streaming: {userLogin}
             </p>
           </div>
           {wowzaStatus && (
@@ -496,7 +496,7 @@ const Dashboard: React.FC = () => {
                 wowzaStatus.running ? 'bg-green-500 animate-pulse' : 'bg-gray-400'
               }`}></div>
               <span className="font-medium text-sm">
-                {wowzaStatus.running ? 'Aplicação Rodando' : 'Aplicação Parada'}
+                {wowzaStatus.running ? 'Servidor Online' : 'Servidor Offline'}
               </span>
             </div>
           )}
@@ -525,7 +525,7 @@ const Dashboard: React.FC = () => {
               </div>
               <h3 className="text-2xl font-bold mb-2">Iniciar</h3>
               <p className="text-sm text-center opacity-90">
-                {wowzaStatus?.running ? 'Já está rodando' : 'Iniciar aplicação Wowza'}
+                {wowzaStatus?.running ? 'Já está rodando' : 'Iniciar servidor'}
               </p>
             </div>
           </button>
@@ -552,7 +552,7 @@ const Dashboard: React.FC = () => {
               </div>
               <h3 className="text-2xl font-bold mb-2">Parar</h3>
               <p className="text-sm text-center opacity-90">
-                {!wowzaStatus?.running ? 'Já está parado' : 'Parar aplicação Wowza'}
+                {!wowzaStatus?.running ? 'Já está parado' : 'Parar servidor'}
               </p>
             </div>
           </button>
@@ -575,25 +575,10 @@ const Dashboard: React.FC = () => {
               </div>
               <h3 className="text-2xl font-bold mb-2">Reiniciar</h3>
               <p className="text-sm text-center opacity-90">
-                Reiniciar aplicação Wowza
+                Reiniciar servidor
               </p>
             </div>
           </button>
-        </div>
-
-        {/* Informações adicionais */}
-        <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-          <div className="flex items-start">
-            <AlertCircle className="h-5 w-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" />
-            <div className="text-sm text-blue-800">
-              <p className="font-medium mb-1">Sobre os controles:</p>
-              <ul className="space-y-1 text-blue-700">
-                <li>• <strong>Iniciar:</strong> Inicia a aplicação Wowza para seu usuário ({userLogin})</li>
-                <li>• <strong>Parar:</strong> Para a aplicação Wowza e interrompe todas as transmissões</li>
-                <li>• <strong>Reiniciar:</strong> Para e inicia novamente a aplicação (útil para resolver problemas)</li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -832,7 +817,7 @@ const Dashboard: React.FC = () => {
                     <Square className="h-5 w-5 mr-2" />
                     Finalizar Transmissão
                   </button>
-                  
+
                   <button
                     onClick={() => window.location.href = '/dashboard/iniciar-transmissao'}
                     className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-3 rounded-xl font-medium hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 flex items-center justify-center"
@@ -850,7 +835,7 @@ const Dashboard: React.FC = () => {
                   Iniciar Transmissão
                 </button>
               )}
-              
+
               <button
                 onClick={() => window.location.href = '/dashboard/gerenciarvideos'}
                 className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-3 rounded-xl font-medium hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 flex items-center justify-center"
@@ -858,44 +843,38 @@ const Dashboard: React.FC = () => {
                 <Video className="h-5 w-5 mr-2" />
                 Gerenciar Vídeos
               </button>
-              
+
               <button
                 onClick={() => window.location.href = '/dashboard/espectadores'}
-                className="w-full bg-gradient-to-r from-purple-500 to-violet-600 text-white p-3 rounded-xl font-medium hover:from-purple-600 hover:to-violet-700 transition-all duration-200 flex items-center justify-center"
+                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white p-3 rounded-xl font-medium hover:from-green-600 hover:to-emerald-700 transition-all duration-200 flex items-center justify-center"
               >
                 <Users className="h-5 w-5 mr-2" />
                 Ver Espectadores
               </button>
-            </div>
-          </div>
 
-          {/* System Status */}
-          <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Status do Sistema</h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Wifi className="h-4 w-4 text-green-500" />
-                  <span className="text-sm text-gray-700">Servidor</span>
-                </div>
-                <span className="text-sm font-medium text-green-600">Online</span>
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Server className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm text-gray-700">Wowza</span>
-                </div>
-                <span className="text-sm font-medium text-blue-600">Conectado</span>
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Activity className="h-4 w-4 text-purple-500" />
-                  <span className="text-sm text-gray-700">API</span>
-                </div>
-                <span className="text-sm font-medium text-purple-600">Funcionando</span>
-              </div>
+              <button
+                onClick={() => window.location.href = '/dashboard/playlists'}
+                className="w-full bg-gradient-to-r from-orange-500 to-amber-600 text-white p-3 rounded-xl font-medium hover:from-orange-600 hover:to-amber-700 transition-all duration-200 flex items-center justify-center"
+              >
+                <Play className="h-5 w-5 mr-2" />
+                Gerenciar Playlists
+              </button>
+
+              <button
+                onClick={() => window.location.href = '/dashboard/players'}
+                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white p-3 rounded-xl font-medium hover:from-cyan-600 hover:to-blue-700 transition-all duration-200 flex items-center justify-center"
+              >
+                <Monitor className="h-5 w-5 mr-2" />
+                Players Externos
+              </button>
+
+              <button
+                onClick={() => window.location.href = '/dashboard/dados-conexao'}
+                className="w-full bg-gradient-to-r from-slate-600 to-gray-700 text-white p-3 rounded-xl font-medium hover:from-slate-700 hover:to-gray-800 transition-all duration-200 flex items-center justify-center"
+              >
+                <Server className="h-5 w-5 mr-2" />
+                Dados de Conexão
+              </button>
             </div>
           </div>
 
@@ -1017,43 +996,6 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Quick Stats Grid */}
-      <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-        <h3 className="text-lg font-bold text-gray-900 mb-6">Visão Geral da Plataforma</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <Radio className="h-8 w-8 text-red-600" />
-            </div>
-            <h4 className="font-semibold text-gray-900 mb-1">Transmissão</h4>
-            <p className="text-sm text-gray-500">Múltiplas plataformas</p>
-          </div>
-
-          <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <Video className="h-8 w-8 text-blue-600" />
-            </div>
-            <h4 className="font-semibold text-gray-900 mb-1">VOD</h4>
-            <p className="text-sm text-gray-500">Biblioteca completa</p>
-          </div>
-
-          <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <Users className="h-8 w-8 text-purple-600" />
-            </div>
-            <h4 className="font-semibold text-gray-900 mb-1">Audiência</h4>
-            <p className="text-sm text-gray-500">Análise em tempo real</p>
-          </div>
-
-          <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <Globe className="h-8 w-8 text-green-600" />
-            </div>
-            <h4 className="font-semibold text-gray-900 mb-1">Global</h4>
-            <p className="text-sm text-gray-500">Alcance mundial</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
