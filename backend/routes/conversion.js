@@ -242,7 +242,8 @@ router.post('/convert', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
     const userLogin = req.user.usuario || `user_${userId}`;
-    const { video_id, quality, custom_bitrate, custom_resolution, use_custom, delete_original, overwrite } = req.body;
+    const { video_id, quality, custom_bitrate, custom_resolution, use_custom, delete_original } = req.body;
+    const overwrite = req.body.overwrite || false;
 
     if (!video_id) {
       return res.status(400).json({ 
@@ -349,7 +350,6 @@ router.post('/convert', authMiddleware, async (req, res) => {
 
     // Verificar se conversão já existe - perguntar ao usuário se deseja prosseguir
     const outputExists = await SSHManager.getFileInfo(serverId, outputPath);
-    const overwrite = req.body.overwrite || false;
 
     if (outputExists.exists && !overwrite) {
       return res.status(409).json({
